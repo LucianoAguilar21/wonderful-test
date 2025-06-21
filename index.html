@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestión de Cosecha - Arándanos</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>Gestión de Pedidos de Arándanos</h1>
+
+  <section id="pedido-form-section">
+    <h2>Crear nuevo pedido</h2>
+    <form id="pedido-form">
+      <label>Cliente: <input type="text" id="cliente" required></label><br>
+
+      <label>Destino:
+        <select id="destino">
+          <option value="USA">USA</option>
+          <option value="UE">UE</option>
+        </select>
+      </label><br>
+
+      <label>Exportadora:
+        <input type="text" id="exportadora" required>
+      </label><br>
+
+      <label>Transporte:
+        <select id="transporte">
+          <option value="marítimo">Marítimo</option>
+          <option value="aéreo">Aéreo</option>
+        </select>
+      </label><br>
+
+      <label>Fecha de inicio:
+        <input type="date" id="fechaInicio" required>
+      </label><br>
+
+      <label>Fecha de cierre:
+        <input type="date" id="fechaCierre">
+      </label><br>
+
+      <label>Observaciones:
+        <textarea id="observaciones"></textarea>
+      </label><br>
+
+      <label>Estado del pedido:
+        <select id="estado">
+          <option value="abierto">Abierto</option>
+          <option value="cerrado">Cerrado</option>
+        </select>
+      </label><br>
+
+      <button type="submit">Guardar pedido</button>
+    </form>
+  </section>
+
+  <section id="pedidos-list-section">
+    <h2>Pedidos creados</h2>
+    <ul id="lista-pedidos"></ul>
+  </section>
+
+    <!-- MODAL PARA CARGAR PALLET -->
+    <div id="modal-pallet" class="modal hidden">
+    <div class="modal-content">
+        <h3>Agregar Pallet</h3>
+        <form id="pallet-form">
+
+        <!-- VARIEDADES -->
+        <h4>Agregar variedad</h4>
+        <div id="form-variedad">
+            <label>Variedad: <input type="text" id="variedad-nombre"></label>
+            <label>Campo: <input type="text" id="variedad-campo"></label>
+            <label>Lotes (separados por coma): <input type="text" id="variedad-lotes"></label>
+            <label>Cantidad de cajas: <input type="number" id="variedad-cajas"></label>
+            <button type="button" onclick="guardarVariedad()">Guardar variedad</button>
+        </div>
+
+        <div>
+            <h5>Variedades agregadas:</h5>
+            <ul id="variedades-agregadas"></ul>
+        </div>
+
+        <!-- MUESTRAS -->
+        <h4>Agregar muestra</h4>
+        <div id="form-muestra">
+            <label>Rojos: <input type="number" id="muestra-rojos"></label>
+            <label>Deshidratadas: <input type="number" id="muestra-deshidratadas"></label>
+            <label>Sensitivas: <input type="number" id="muestra-sensitivas"></label>
+            <label>Blandas: <input type="number" id="muestra-blandas"></label>
+            <label>Heridas Frescas: <input type="number" id="muestra-heridas"></label>
+            <label>Incidencia: <input type="number" id="muestra-incidencia"></label>
+            <label>Podridos: <input type="number" id="muestra-podridos"></label>
+            <label>Hongos: <input type="number" id="muestra-hongos"></label>
+            <button type="button" onclick="guardarMuestra()">Guardar muestra</button>
+        </div>
+
+        <div>
+            <h5>Muestras agregadas:</h5>
+            <ul id="muestras-agregadas"></ul>
+        </div>
+
+        <!-- OTROS CAMPOS -->
+        <label>QC (%): <input type="number" id="qc" required></label>
+        <label>Score:
+            <select id="score">
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+            </select>
+        </label>
+        <label>Trazabilidad: <input type="text" id="trazabilidad"></label>
+
+        <input type="hidden" id="pedidoId" />
+        <br><br>
+        <button type="submit">Guardar Pallet</button>
+        <button type="button" onclick="cerrarModal()">Cancelar</button>
+        </form>
+    </div>
+    </div>
+
+
+
+
+  <script src="script.js"></script>
+</body>
+</html>
