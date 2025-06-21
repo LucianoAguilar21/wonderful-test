@@ -28,6 +28,8 @@ section {
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
 }
 
 .modal-content {
@@ -40,3 +42,4 @@ section {
 .hidden {
   display: none;
 }
+
