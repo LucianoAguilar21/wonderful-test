@@ -54,7 +54,7 @@ function mostrarPedidos() {
           const totalCajas = pallet.variedades.reduce((sum, v) => sum + v.cantidadCajas, 0);
           return `
             <li>
-              <!--Pallet ID: ${pallet.id} |
+              <!--Pallet ID: ${pallet.id} -->|
               P: ${pallet.numberPallet} |
               ${pallet.variedades.map(v => v.variedad).join(", ")} |
               Total Cajas: ${totalCajas} |
@@ -271,6 +271,7 @@ function verPallet(pedidoId, palletId) {
   const pallet = pedido.pallets.find(p => p.id === palletId);
 
   let detalle = `📦 Pallet ID: ${pallet.id}\n`;
+  detalle += `Número de Pallet: ${pallet.numberPallet}\n`;
   detalle += `📌 Variedades:\n`;
   pallet.variedades.forEach((v, i) => {
     detalle += `  ${i + 1}. ${v.variedad} - Campo ${v.nombreCampo} - Lotes: ${v.lotes.join(", ")} - Cajas: ${v.cantidadCajas}\n`;
