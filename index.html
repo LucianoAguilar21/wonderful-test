@@ -42,14 +42,42 @@
 
       <label>Observaciones:
         <textarea id="observaciones"></textarea>
-      </label><br>
-
+      </label>
+    
       <label>Estado del pedido:
         <select id="estado">
           <option value="abierto">Abierto</option>
           <option value="cerrado">Cerrado</option>
         </select>
       </label><br>
+      <label>Tamaño del pote (oz):
+        <input type="text" id="potSize" placeholder="Ej: 4.4, 6, 8" required>
+      </label>
+
+      <label>
+        ¿Es orgánico?
+        <input type="checkbox" id="organic">
+      </label>
+
+      <label>
+        ¿Lleva etiqueta?
+        <input type="checkbox" id="label">
+      </label>
+
+      <label>
+        Tipo de caja:
+        <input type="text" id="box">
+      </label>
+
+      <label>Tratamiento:
+        <select id="treatment" required>
+          <option value="">Seleccionar</option>
+          <option value="Frio">Frío</option>
+          <option value="Brom">Brom</option>
+        </select>
+      </label>
+
+  <br>
 
       <button type="submit">Guardar pedido</button>
     </form>
@@ -65,9 +93,10 @@
     <div class="modal-content">
         <h3>Agregar Pallet</h3>
         <form id="pallet-form">
-
+        <label>Numero de pallet: <input type="text" id="palletNumber"></label>
+        <input type="text" id="palletNumber" hidden>
         <!-- VARIEDADES -->
-        <h4>Agregar variedad</h4>
+        <h5>Agregar variedad</h5>
         <div id="form-variedad">
             <label>Variedad: <input type="text" id="variedad-nombre"></label>
             <label>Campo: <input type="text" id="variedad-campo"></label>
@@ -82,7 +111,7 @@
         </div>
 
         <!-- MUESTRAS -->
-        <h4>Agregar muestra</h4>
+        <h4>DEFECTOS DE CALIDAD</h4>
         <div id="form-muestra">
             <label>Rojos: <input type="number" id="muestra-rojos"></label>
             <label>Deshidratadas: <input type="number" id="muestra-deshidratadas"></label>
@@ -96,7 +125,7 @@
         </div>
 
         <div>
-            <h5>Muestras agregadas:</h5>
+            <h5>Defectos agregados:</h5>
             <ul id="muestras-agregadas"></ul>
         </div>
 

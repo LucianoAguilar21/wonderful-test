@@ -6,16 +6,22 @@ document.getElementById("pedido-form").addEventListener("submit", function (e) {
   e.preventDefault();
 
   const pedido = {
-    id: Date.now(),
-    cliente: document.getElementById("cliente").value,
-    destino: document.getElementById("destino").value,
-    exportadora: document.getElementById("exportadora").value,
-    transporte: document.getElementById("transporte").value,
-    fechaInicio: document.getElementById("fechaInicio").value,
-    fechaCierre: document.getElementById("fechaCierre").value,
-    observaciones: document.getElementById("observaciones").value,
-    estado: document.getElementById("estado").value,
-    pallets: []
+      id: Date.now(),
+      cliente: document.getElementById("cliente").value,
+      destino: document.getElementById("destino").value,
+      exportadora: document.getElementById("exportadora").value,
+      transporte: document.getElementById("transporte").value,
+      fechaInicio: document.getElementById("fechaInicio").value,
+      fechaCierre: document.getElementById("fechaCierre").value,
+      observaciones: document.getElementById("observaciones").value,
+      cantidadPallets: 0,
+      estado: "abierto",
+      potSize: document.getElementById("potSize").value,
+      organic: document.getElementById("organic").checked,
+      label: document.getElementById("label").checked,
+      box: document.getElementById("box").value,
+      treatment: document.getElementById("treatment").value,
+      pallets: []
   };
 
   pedidos.push(pedido);
@@ -33,8 +39,14 @@ function mostrarPedidos() {
     item.innerHTML = `
       <strong>Cliente:</strong> ${p.cliente} |
       <strong>Destino:</strong> ${p.destino} |
-      <strong>Exportadora:</strong> ${p.exportadora} |
-      <strong>Estado:</strong> ${p.estado}
+      <strong>Exp:</strong> ${p.exportadora} |
+      <strong>Estado:</strong> ${p.estado} | 
+      <p><strong>Pote:</strong> ${p.potSize} oz | 
+      <strong>Orgánico:</strong> ${p.organic ? 'Sí' : 'No'} | 
+      <strong>Etiqueta:</strong> ${p.label ? 'Sí' : 'No'} | 
+      <strong>Caja:</strong> ${p.box} |
+      <strong>Tratamiento:</strong> ${p.treatment}</p>
+
       <br>
       <button onclick="abrirModal(${p.id})">Agregar Pallet</button>
       <ul>
@@ -42,7 +54,9 @@ function mostrarPedidos() {
           const totalCajas = pallet.variedades.reduce((sum, v) => sum + v.cantidadCajas, 0);
           return `
             <li>
-              Pallet ID: ${pallet.id} |
+              <!--Pallet ID: ${pallet.id} |
+              P: ${pallet.numberPallet} |
+              ${pallet.variedades.map(v => v.variedad).join(", ")} |
               Total Cajas: ${totalCajas} |
               QC: ${pallet.qc}% |
               Score: ${pallet.score}
@@ -106,6 +120,7 @@ document.getElementById("pallet-form").addEventListener("submit", function (e) {
 
   const pallet = {
     id: Date.now(),
+    numberPallet: document.getElementById("palletNumber").value,
     variedades: [...variedadesTemp],
     muestras: [...muestrasTemp],
     qc: Number(document.getElementById("qc").value),
@@ -256,16 +271,18 @@ function verPallet(pedidoId, palletId) {
   const pallet = pedido.pallets.find(p => p.id === palletId);
 
   let detalle = `📦 Pallet ID: ${pallet.id}\n`;
-  detalle += `🧮 QC: ${pallet.qc}%\n`;
-  detalle += `🅰️ Score: ${pallet.score}\n`;
-  detalle += `🔖 Trazabilidad: ${pallet.trazabilidad}\n\n`;
-
   detalle += `📌 Variedades:\n`;
   pallet.variedades.forEach((v, i) => {
     detalle += `  ${i + 1}. ${v.variedad} - Campo ${v.nombreCampo} - Lotes: ${v.lotes.join(", ")} - Cajas: ${v.cantidadCajas}\n`;
   });
 
-  detalle += `\n🧪 Muestras:\n`;
+  detalle += `🧮 QC: ${pallet.qc}%\n`;
+  detalle += `🅰️ Score: ${pallet.score}\n`;
+  detalle += `🔖 Trazabilidad: ${pallet.trazabilidad}\n\n`;
+
+
+
+  detalle += `\n🧪 Defectos:\n`;
   pallet.muestras.forEach((m, i) => {
     detalle += `  Muestra ${i + 1}: Rojos ${m.rojos}%, Deshidratadas ${m.deshidratadas}%, Sensitivas ${m.sensitivas}%, Blandas ${m.blandas}%, Heridas ${m.heridasFrescas}%, Incidencia ${m.incidencia}%, Podridos ${m.podridos}%, Hongos ${m.hongos}%\n`;
   });
