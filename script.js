@@ -47,7 +47,17 @@ function mostrarPedidos() {
       <strong>Orgánico:</strong> ${p.organic ? 'Sí' : 'No'} | 
       <strong>Etiqueta:</strong> ${p.label ? 'Sí' : 'No'} | 
       <strong>Caja:</strong> ${p.box} |
-      <strong>Tratamiento:</strong> ${p.treatment}</p>
+      <strong>Tratamiento:</strong> ${p.treatment} <br>
+
+     <strong>${p.pallets.length}P |
+      ${p.potSize} oz | 
+      ${p.organic ? 'Sí' : 'No'} | 
+      ${p.label ? 'Sí' : 'No'} | 
+      ${p.box} |
+      ${p.treatment} |
+      ${p.exportadora} |
+      ${p.destino} |
+      ${p.transporte}</strong> <br>
 
       
       <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modal-pallet"  onclick="abrirModal(${p.id})">Agregar Pallet</button>  
@@ -231,7 +241,7 @@ function verPallet(pedidoId, palletId) {
   let detalle = `Cliente: ${pedido.cliente}\n`;
   detalle += `Número de Pallet: ${pallet.numberPallet}\n`;
   pallet.variedades.forEach((v, i) => {
-    detalle += `  ${i + 1}. ${v.variedad} - Campo ${v.nombreCampo} - Lotes: ${v.lotes.join(", ")} - Cajas: ${v.cantidadCajas}\n`;
+    detalle += `  ${i + 1}. Campo ${v.nombreCampo} - Lotes: ${v.lotes.join(", ")} - ${v.variedad} - Cajas: ${v.cantidadCajas}\n`;
   });
 
   detalle += `QC: ${pallet.qc}%\n`;
